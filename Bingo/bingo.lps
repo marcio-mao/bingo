@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="9"/>
+    <BuildModes Active="Default"/>
+    <Units Count="26">
+      <Unit0>
+        <Filename Value="bingo.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos Y="21"/>
+        <UsageCount Value="126"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="ubingo.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uBingo"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="119"/>
+        <CursorPos X="30" Y="115"/>
+        <UsageCount Value="126"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="ugera.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form2"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="ugera"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="183"/>
+        <CursorPos X="36" Y="205"/>
+        <UsageCount Value="101"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="ubingo.lfm"/>
+        <TopLine Value="28"/>
+        <CursorPos X="73" Y="47"/>
+        <UsageCount Value="1"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="C:\usr\share\lazarus\1.4.0\lcl\include\listitems.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="85"/>
+        <CursorPos Y="99"/>
+        <UsageCount Value="13"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="C:\usr\share\lazarus\1.4.0\lcl\include\customlistview.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1029"/>
+        <CursorPos Y="1042"/>
+        <UsageCount Value="7"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="C:\usr\share\lazarus\1.4.0\lcl\include\listitem.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="629"/>
+        <CursorPos Y="638"/>
+        <UsageCount Value="8"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="C:\usr\share\lazarus\1.4.0\lcl\include\control.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="3422"/>
+        <CursorPos Y="3431"/>
+        <UsageCount Value="7"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="C:\usr\share\lazarus\1.4.0\lcl\include\buttoncontrol.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="12"/>
+        <CursorPos Y="21"/>
+        <UsageCount Value="7"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="C:\usr\share\lazarus\1.4.0\lcl\include\buttons.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="162"/>
+        <CursorPos Y="170"/>
+        <UsageCount Value="7"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="C:\usr\share\lazarus\1.4.0\lcl\include\bitbtn.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="57"/>
+        <CursorPos Y="65"/>
+        <UsageCount Value="7"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="C:\usr\share\lazarus\1.4.0\lcl\include\wincontrol.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="8129"/>
+        <CursorPos Y="8141"/>
+        <UsageCount Value="7"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="C:\usr\share\lazarus\1.4.0\lcl\lclmessageglue.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="111"/>
+        <CursorPos Y="123"/>
+        <UsageCount Value="7"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="C:\usr\share\lazarus\1.4.0\lcl\interfaces\gtk2\gtk2wsstdctrls.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="2416"/>
+        <CursorPos Y="2424"/>
+        <UsageCount Value="7"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="C:\usr\share\lazarus\1.4.0\lcl\interfaces\gtk2\gtk2widgetset.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="2395"/>
+        <CursorPos Y="2404"/>
+        <UsageCount Value="7"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="C:\usr\share\lazarus\1.4.0\lcl\interfaces\gtk2\gtk2wscontrols.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="307"/>
+        <CursorPos Y="317"/>
+        <UsageCount Value="7"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="ugera.lfm"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="79"/>
+        <CursorPos X="52" Y="83"/>
+        <UsageCount Value="11"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="E:\lazarus\ide\lazarus.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="115"/>
+        <CursorPos Y="142"/>
+        <UsageCount Value="8"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="C:\usr\share\lazarus\1.4.0\ide\lazarus.pp"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="76" Y="13"/>
+        <UsageCount Value="8"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="..\..\..\raudus\bin\fpc264-laz124\i386-linux\RaudusFPC.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <CursorPos Y="10"/>
+        <UsageCount Value="9"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="..\..\..\raudus\bin\fpc264-laz124\i386-linux\RaApplication.pas"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="8"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="E:\lazarus\lcl\include\control.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="2113"/>
+        <CursorPos Y="2726"/>
+        <UsageCount Value="14"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="E:\lazarus\lcl\include\customlistview.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1058"/>
+        <CursorPos Y="1074"/>
+        <UsageCount Value="14"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="E:\lazarus\lcl\include\listitems.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="113"/>
+        <CursorPos Y="128"/>
+        <UsageCount Value="14"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="E:\lazarus\fpc\2.6.4\bin\i386-win32\version2\nsXPCOM.pas"/>
+        <UnitName Value="nsXPCOM"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="5"/>
+        <CursorPos X="2" Y="19"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="E:\lazarus\fpc\2.6.4\bin\i386-win32\version2\build_fpmake_559D1A4620C8\fpmkunit.pp"/>
+        <UnitName Value="fpmkunit"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit25>
+    </Units>
+    <General>
+      <ActiveWindowIndexAtStart Value="-1"/>
+    </General>
+    <JumpHistory HistoryIndex="-1"/>
+  </ProjectSession>
+  <Debugging>
+    <Watches Count="1">
+      <Item1>
+        <Expression Value="ItemLv.Items"/>
+      </Item1>
+    </Watches>
+  </Debugging>
+</CONFIG>

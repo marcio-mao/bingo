@@ -1,0 +1,311 @@
+unit ugera;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
+  ComCtrls, StdCtrls, Buttons;
+
+type
+
+  { TForm2 }
+
+  TForm2 = class(TForm)
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    BitBtn3: TBitBtn;
+    BitBtn4: TBitBtn;
+    Edit1: TEdit;
+    Label1: TLabel;
+    ListView1: TListView;
+    ListView2: TListView;
+    PageControl1: TPageControl;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    SaveDialog1: TSaveDialog;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    UpDown1: TUpDown;
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
+    procedure BitBtn4Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure ListView2AdvancedCustomDrawItem(Sender: TCustomListView;
+      Item: TListItem; State: TCustomDrawState; Stage: TCustomDrawStage;
+      var DefaultDraw: Boolean);
+    procedure ListView2AdvancedCustomDrawSubItem(Sender: TCustomListView;
+      Item: TListItem; SubItem: Integer; State: TCustomDrawState;
+      Stage: TCustomDrawStage; var DefaultDraw: Boolean);
+    procedure ListView2ColumnClick(Sender: TObject; Column: TListColumn);
+    procedure ListView2CustomDrawSubItem(Sender: TCustomListView;
+      Item: TListItem; SubItem: Integer; State: TCustomDrawState;
+      var DefaultDraw: Boolean);
+    procedure UpDown1Click(Sender: TObject; Button: TUDBtnType);
+  private
+    { private declarations }
+    iSeqCartao: Integer;
+  public
+    { public declarations }
+  end;
+
+var
+  Form2: TForm2;
+const
+  LVM_FIRST               = $1000;
+  LVM_GETSUBITEMRECT      = LVM_FIRST + 56;
+  LVIR_BOUNDS             = 0;
+
+implementation
+uses uBingo;
+
+{$R *.lfm}
+
+{ TForm2 }
+
+{
+function ListView_GetSubItemRect(hwndLV: WidgetSet.AppHandle; iItem, iSubItem: Integer;
+  code: DWORD; prc: PRect): BOOL;
+begin
+  if prc <> nil then
+  begin
+    prc^.Top := iSubItem;
+    prc^.Left := code;
+  end;
+  Result := BOOL(SendMessage(hwndLV, LVM_GETSUBITEMRECT, iItem, Longint(prc)));
+end;
+}
+
+procedure TForm2.UpDown1Click(Sender: TObject; Button: TUDBtnType);
+var iQtde : Integer;
+begin
+ // iQtde := StrtoInt('0'+Trim(Edit1.Text) );
+ // if ((Button in [btPrev]) and (iQtde >0) )
+ //   then Edit1.Text := InttoStr(iQtde - 1)
+ //   else Edit1.Text := InttoStr(iQtde + 1);
+
+end;
+
+procedure TForm2.BitBtn1Click(Sender: TObject);
+var iColunas: Array[0..4] of TStringList;
+    num, iQtde, i, j, k: Integer;
+    itemLV : TListItem;
+begin
+// Gera randomico para cada colunas (5 numeros)
+  iQtde := StrtoInt('0'+Trim(Edit1.Text) );
+  for i:=1 to iQtde do begin // Para cada cartão solitado
+      for j:=0 to 4 do begin   // Para cada coluna
+          iColunas[j] := TStringList.Create;
+          for k:=1 to 5 do begin  // Para cada item da coluna
+              repeat
+                num := (j*Form1.iMaxCol)+1+Random(Form1.iMaxCol);
+              until (iColunas[j].IndexOf(Format('%0.3d', [num]))<0 );
+              iColunas[j].Add(Format('%0.3d', [num]) );
+          end;
+          iColunas[j].Sort;   // Ordena a coluna
+      end;
+      iSeqCartao:= iSeqCartao + 1;
+      for k:=1 to 5 do begin // Para cada linha do Cartão
+          itemLV := TListItem.Create(ListView1.Items);
+          itemLV.Caption:= Format('%0.5d', [iSeqCartao]);
+          for j:=0 to 4 do begin  // Pega a posição k da coluna k
+              num := StrtoInt('0'+iColunas[j].Strings[k-1] );
+              itemLV.SubItems.Add(InttoStr(num) );
+          end;
+          itemLV.SubItems.Add('');
+          try
+             ListView1.Items.AddItem(itemLV);
+          except
+             on E: Exception do showmessage(pchar(Exception));
+          end;
+      end;
+      for k:=0 to 4 do begin  // Limpa as Colunas
+            iColunas[k].Clear;
+            iColunas[k].Destroy;
+      end;
+      ListView1.Items.Add;
+  end;
+  try
+    ListView1.Refresh;
+  except
+    on E: Exception do showmessage(pchar(Exception));
+  end;
+end;
+
+procedure TForm2.BitBtn2Click(Sender: TObject);
+begin
+  ListView1.Items.Clear;
+end;
+
+procedure TForm2.BitBtn3Click(Sender: TObject);
+var arq: TextFile;  i: Word;
+begin
+  if (SaveDialog1.Execute) then begin
+    AssignFile(arq, SaveDialog1.FileName);
+    Rewrite(arq);
+    WriteLn(arq, 'num;B;I;N;G;O');
+    for i:=0 to ListView1.Items.Count -1 do begin
+       with ListView1.Items[i]  do begin
+          if ( Length(ListView1.Items[i].Caption) > 0) then begin
+              WriteLn(arq, Format('%0.5d', [StrtoInt('0'+Caption)] )
+                + ';' + SubItems[0]
+                + ';' + SubItems[1]
+                + ';' + SubItems[2]
+                + ';' + SubItems[3]
+                + ';' + SubItems[4]
+              );
+          end;
+       end;
+    end;
+    CloseFile(arq);
+    ShowMessage('Arquigo gerado:' + SaveDialog1.FileName);
+  end;
+end;
+
+procedure TForm2.BitBtn4Click(Sender: TObject);
+var slColunas: Array[0..4] of TStringList;
+    i, j, k, m, iNum: Integer;
+    ctLin, ctCol, ctDiag1, ctDiag2: word;
+    iLin, iCol, iDia: word;
+    sNum, sObs: String;
+    itemLV : TListItem;
+begin
+  ListView2.Clear;
+  for k:=0 to 4 do slColunas[k] := TStringList.Create;
+//
+  m:= -1;
+  iDia := 0; iCol:=0; iLin:=0; sObs:= '0-';
+  for i:=0 to ListView1.Items.Count-1 do begin
+      if (ListView1.Items[i].Caption = '') then begin
+        m := -1;
+        sObs:=''; end
+      else begin
+        m := m + 1; ctLin:=0;
+        slColunas[m].Clear;
+        for j:=0 to 4 do begin
+          iNum := StrtoInt('0'+ListView1.Items[i].SubItems[j]);
+          sNum := Format('%0.3d',[iNum]);
+          slColunas[m].Add(sNum);   //  slColunas[m].Items[j]
+          if ( (Form1.slBolas.IndexOf(sNum)>=0)
+            or ((j=2) and (m=2)) ) then ctLin := ctLin + 1;
+        end;
+//
+        if (ctLin = 4)
+          then sObs := '1-Linha p/ bater'
+          else if (ctLin = 5) then iLin := iLin + 1;
+
+//
+        if (m>=4) then begin
+          ctDiag1:=0; ctDiag2:=0; iCol:=0;
+          for j:=0 to 4 do begin  // Para Colunas
+            ctCol := 0;
+            for k:=0 to 4 do begin   // Para Linhas
+               if ((j=2) and (k=2)) then begin
+                 ctCol := ctCol + 1;
+//               ctLin := ctLin + 1;
+                 ctDiag1 := CtDiag1 + 1;
+                 ctDiag2 := CtDiag2 + 1; end
+               else begin
+                 sNum := slColunas[j].Strings[k];
+                 if (Form1.slBolas.IndexOf(sNum
+                 )>=0) then begin
+                   ctCol := ctCol + 1;
+                   if (k=j)   then ctDiag1 := ctDiag1 + 1;
+                   if (k=(4-j)) then ctDiag2 := ctDiag2 + 1;
+                 end;
+               end; // else
+            end; // For K
+ //
+            if (ctCol = 4)
+              then sObs := '4-Coluna p/ bater'
+              else if (ctCol >= 5) then iCol := iCol + 1;
+//
+          end; // For J
+//
+          if ((ctDiag1 = 4) or (ctDiag2 = 4))
+            then sObs := '2-Diagonal p/ bater'
+            else if ((ctDiag1 = 5) or (ctDiag2 = 5)) then iDia := iDia + 1;
+          if ((iCol = 5) and (iLin = 5))
+            then sObs := '1-Batido';
+          itemLV := TListItem.Create(ListView2.Items);
+          itemLV.Caption:= ListView1.Items[i].Caption;
+          itemLV.SubItems.Add(InttoStr(iLin));
+          itemLV.SubItems.Add(InttoStr(iCol));
+          itemLV.SubItems.Add(InttoStr(iDia));
+          itemLV.SubItems.Add(Copy(sObs,3, 19) );
+          itemLV.SubItems.Add(LeftStr(sObs+'                   ', 19)+ itemLV.Caption);
+          ListView2.Items.AddItem(itemLV);
+          m := -1;
+          iDia := 0; iCol:=0; iLin:=0; sObs:= '0-';
+        end; // If (M
+      end; // else
+  end; // For I
+  for k:=0 to 4 do slColunas[k].Destroy;
+
+end;
+
+procedure TForm2.FormCreate(Sender: TObject);
+begin
+  BitBtn2Click(Sender);
+end;
+
+procedure TForm2.ListView2AdvancedCustomDrawItem(Sender: TCustomListView;
+  Item: TListItem; State: TCustomDrawState; Stage: TCustomDrawStage;
+  var DefaultDraw: Boolean);
+begin
+    DefaultDraw := True;
+  with Sender.canvas do
+    font.Color:= $000000;
+end;
+
+procedure TForm2.ListView2AdvancedCustomDrawSubItem(Sender: TCustomListView;
+  Item: TListItem; SubItem: Integer; State: TCustomDrawState;
+  Stage: TCustomDrawStage; var DefaultDraw: Boolean);
+begin
+
+end;
+
+procedure TForm2.ListView2ColumnClick(Sender: TObject; Column: TListColumn);
+begin
+  ListView2.SortType:=stText;
+  ListView2.SortColumn:=Column.Index;
+  if (ListView2.SortDirection = sdAscending)
+    then ListView2.SortDirection := sdDescending
+    else ListView2.SortDirection := sdAscending;
+end;
+
+procedure TForm2.ListView2CustomDrawSubItem(Sender: TCustomListView;
+  Item: TListItem; SubItem: Integer; State: TCustomDrawState;
+  var DefaultDraw: Boolean);
+  var
+  wrtRect: TRect;
+  clwk: integer;
+  begin
+  if SubItem = 0 then Exit;
+  if Item = nil then Exit;
+    ListView1.Canvas.Font.Color := $0E0FFE0; // GetSysColor(COLOR_WINDOWTEXT);
+  case SubItem of
+  3 : clwk :=  $0E0FFE0;
+  4 : clwk :=  $0E0FFFF;
+  5 : clwk :=  $0E0E0FF;
+  else clwk := ListView1.Color;
+  end;
+  ListView1.Canvas.Font := ListView1.Font;
+  DefaultDraw := true;
+//  if ListView_GetSubItemRect(ListView1.Handle, Item.Index ,  SubItem, LVIR_BOUNDS, @wrtRect ) then
+//  begin
+//    ListView1.Canvas.Brush.Color := clwk;
+//    ListView1.Canvas.FillRect(wrtRect);
+//  end;
+end;
+
+
+
+
+
+end.
+
